@@ -6,6 +6,55 @@
     <title>WalletWise</title>
 </head>
 <body>
-    
+    <header>
+        <div class="heading">WalletWise</div>
+        <nav class="header-nav">
+            <ul>
+                <li class="nav-item" id="home">Home</li>
+                <li class="nav-item" id="spreadSheet">Spread Sheet</li>
+                <li class="nav-item" id="filter"> Advanced Filter</li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div class="section section-home" id="section-home">
+            <div class="home-inps">
+                <div class="inps">
+                    <div class="transaction-inp inp">
+                        <label for="transaction">Transaction:</label>
+                        <input type="text" id="transaction">
+                    </div>
+                    <div class="amount-inp inp">
+                        <label for="amount">Amount:</label>
+                        <input type="text" id="amount">
+                    </div>
+                    <div class="transactionType-inp inp">
+                        <label for="transactionType">Income or Expense:</label>
+                        <select name="" id="transactionType">
+                            <option value="expense">Expense</option>
+                            <option value="income">Income</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="close-btn"></div>
+            </div>
+            <div class="home-table">
+                <table>
+                    <tHead>
+                        <tr>
+                            <th>Transactions</th>
+                            <th>Expenses</th>
+                            <th>Income</th>
+                        </tr>
+                    </tHead>
+                    <tBody>
+                        
+                    </tBody>
+                </table>
+            </div>
+        </div>
+        <div class="section section-spreadSheet" id="section-spreadSheet"></div>
+        <div class="section section-filter" id="section-filter"></div>
+    </main>
 </body>
 </html>
