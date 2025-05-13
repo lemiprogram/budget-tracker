@@ -14,3 +14,35 @@ ul{
                                         Header
                 **************************************************************** 
 */
+
+header{
+    display: flex;
+    justify-content: space-between;
+}
+
+header .heading {
+    font-size: 2.5em;
+    padding-left: 20px;
+}
+
+ul{
+}
+li{
+    padding: 15px 20px;
+}
+.menu{
+    display: none;
+    padding: 15px 20px;
+}
+.menu svg{
+    width: 20px;
+    cursor: pointer;
+}
+@media screen  and (max-width:700px) {
+    nav{
+        display: none;
+    }
+    .menu{
+        display: block;
+    }
+}
