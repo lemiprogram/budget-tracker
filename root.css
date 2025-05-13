@@ -1,0 +1,37 @@
+:root{
+    --primary-100:--dm-primary-100;
+    --primary-200:--dm-primary-200;
+    --primary-300:--dm-primary-300;
+    --accent-100:--dm-accent-100;
+    --accent-200:--dm-accent-200;
+    --text-100:--dm-text-100;
+    --text-200:--dm-text-200;
+    --bg-100:--dm-bg-100;
+    --bg-200:--dm-bg-200;
+    --bg-300:--dm-bg-300;
+
+
+    /* light mode */
+    --lm-primary-100:#1E2022;
+    --lm-primary-200:#34373b;
+    --lm-primary-300:#F0F5F9;
+    --lm-accent-100:#788189;
+    --lm-accent-200:#e1e4e6;
+    --lm-text-100:#1E2022;
+    --lm-text-200:#52616B;
+    --lm-bg-100:#F0F5F9;
+    --lm-bg-200:#C9D6DF;
+    --lm-bg-300:#bfc7d1;
+    /* dark mode */
+    --dm-primary-100:#FFFFFF;
+    --dm-primary-200:#e0e0e0;
+    --dm-primary-300:#9b9b9b;
+    --dm-accent-100:#7F7F7F;
+    --dm-accent-200:#ffffff;
+    --dm-text-100:#FFFFFF;
+    --dm-text-200:#777777;
+    --dm-bg-100:#000000;
+    --dm-bg-200:#161616;
+    --dm-bg-300:#2c2c2c;
+      
+}
