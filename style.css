@@ -9,6 +9,10 @@ ul{
     display: flex;
     list-style: none;
 }
+body{
+    background-color: var(--bg-100);
+    color: var(--text-100);
+}
 /*
                 ****************************************************************
                                         Header
@@ -37,6 +41,7 @@ li{
 .menu svg{
     width: 20px;
     cursor: pointer;
+    fill: var(--accent-100);
 }
 @media screen  and (max-width:700px) {
     nav{
@@ -45,4 +50,55 @@ li{
     .menu{
         display: block;
     }
+    
 }
+
+/*
+                ****************************************************************
+                                        Main
+                **************************************************************** 
+*/
+/* section-home */
+.section-home{
+    position: relative;
+}
+    /* home-inps */
+.home-inps{
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--faded-black);
+    display: none;
+    place-content: center start;
+}
+.inps{
+    background-color: var(--bg-200);
+    height: 100vh;
+    display: grid;
+    place-content:center;
+    gap: 30px;
+}
+.inp{
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    gap: 10px;
+}
+label +:is(input,select){
+    min-width: 100px;
+    height: 30px;
+    border-radius: 20px;
+    width: 200px;
+    border: none;
+    background-color: aliceblue;
+}
+select{
+    text-align: center;
+}
+@media screen and (max-width:700px){
+    .inp{
+        flex-flow: column;
+    }
+}
+
+    /* home-table */
