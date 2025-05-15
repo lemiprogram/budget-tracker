@@ -10,6 +10,7 @@
   const [homeSection,tableSection,spreadSheetSection,filterSection] = sections
   //btns
   const addTransactionBtn = document.querySelector("#add-transaction")
+  const showTransactionInpsBtn = document.querySelector(".show-transactionInps-btn")
   //table
   const tableInps = document.querySelector(".table-inps")
   const table = document.querySelector(".table")
@@ -29,6 +30,9 @@ function renderPage(){
   let balance = calcBalance(transactions)
   let totalExpense = calcExpense(transactions)
   let totalIncome = calcIncome(transactions)
+  //home section
+  
+  // table section
   transactionTable.innerHTML = transactions.map(transaction => `
         <tr>
             <td>${transaction.date.toDateString().slice(4)}</td>
@@ -42,12 +46,7 @@ function renderPage(){
   tableTotalExpense.innerHTML = totalExpense?totalExpense:"-"
   tableTotalIncome.innerHTML = totalIncome?totalIncome:"-"
 
-  if(tableInps.style.display === "none"){
-      table.style.placeContent = "center"
-  }
-  else{
-    table.style.placeContent = "end"
-  }
+
   
 }
 // changeFocusNav = adds the focus-nav class to the nav-link selected
@@ -130,7 +129,7 @@ function renderPage(){
     }
   }
   function closeElement(element){
-    element.style.display = "none"
+    element.classList.add("hidden")
   }
 //add event listeners
   //when a nav item is clicked it would evoke thechangeFocusNav function on the item clicked
@@ -139,7 +138,11 @@ function renderPage(){
   logo.addEventListener("click",()=>changeFocusNav(homeNav))
   //when the add button is clicked it would add a transaction to the treansactions array 
   addTransactionBtn.addEventListener("click", addTransaction)
-  //
+  //brings up the table-inps
+  showTransactionInpsBtn.addEventListener("click", ()=>{
+    renderPage()
+    tableInps.classList.remove("hidden")
+  })
 renderPage()
 changeFocusNav(homeNav)
 showWindow(document.querySelector(".table-inps"))

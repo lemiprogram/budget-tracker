@@ -1,5 +1,5 @@
 :root{
-    --fadded-black:rgba(0, 0, 0, 0.457);
+    --faded-black:#00000037;
 
     --primary-100:var(--lm-primary-100);
     --primary-200:var(--lm-primary-200);
@@ -24,6 +24,7 @@
     --lm-bg-100:#F0F5F9;
     --lm-bg-200:#C9D6DF;
     --lm-bg-300:#bfc7d1;
+      
     /* dark mode */
     --dm-primary-100:#FFFFFF;
     --dm-primary-200:#e0e0e0;
