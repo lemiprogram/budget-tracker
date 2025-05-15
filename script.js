@@ -15,21 +15,25 @@
   //arrays
   let transactions = [];
 
+  //values
+  let balance = localStorage.getItem("balance")?Number(localStorage.getItem("balance")):0;
+
 //functions
 
 //renderPage = renders the page to the original set state
 function renderPage(){
-  // changeFocusNav(homeNav)
+  
   transactionTable.innerHTML = transactions.map(transaction => `
-    <tr>
-                            <td>${transaction.date.toDateString().slice(4)}</td>
-                            <td>${transaction.title}</td>
-                            <td>${transaction.type === "expense"? transaction.amount:"-"}</td>
-                            <td>${transaction.type === "income"? transaction.amount:"-"}</td>
-                        </tr>
+        <tr>
+            <td>${transaction.date.toDateString().slice(4)}</td>
+            <td>${transaction.title}</td>
+            <td class="expense-value">${transaction.type === "expense"? transaction.amount:"-"}</td>
+            <td class="income-value">${transaction.type === "income"? transaction.amount:"-"}</td>
+        </tr>
     `
   ).join("")
-
+  calcBalance(transactions);
+  console.log(balance)
   
 }
 // changeFocusNav = adds the focus-nav class to the nav-link selected
@@ -65,9 +69,20 @@ function renderPage(){
       amount:Number(amount.value),
       type:type.value,
     });
-    console.log(transactions)
     renderPage();
   } 
+  //calcBalance = calculates the balance after the page is rendered
+  function calcBalance(arr){
+    balance = 0
+    for(let obj of arr){
+      if(obj.type === "income"){
+        balance += Number(obj.amount)
+        continue
+      }
+      balance -= Number(obj.amount)
+    }
+  }
+  
 //add event listeners 
   //when a nav item is clicked it would evoke the changeFocusNav function on the item clicked
   navItems.forEach(item=>item.addEventListener("click",e=>changeFocusNav(e.target)))
@@ -75,4 +90,6 @@ function renderPage(){
   logo.addEventListener("click",()=>changeFocusNav(homeNav))
   //when the add button is clicked it would add a transaction to the treansactions array 
   addTransactionBtn.addEventListener("click", addTransaction)
+  //
 renderPage()
+changeFocusNav(homeNav)

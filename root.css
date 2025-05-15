@@ -1,16 +1,16 @@
 :root{
     --fadded-black:rgba(0, 0, 0, 0.457);
 
-    --primary-100:var(--dm-primary-100);
-    --primary-200:var(--dm-primary-200);
-    --primary-300:var(--dm-primary-300);
-    --accent-100:var(--dm-accent-100);
-    --accent-200:var(--dm-accent-200);
-    --text-100:var(--dm-text-100);
-    --text-200:var(--dm-text-200);
-    --bg-100:var(--dm-bg-100);
-    --bg-200:var(--dm-bg-200);
-    --bg-300:var(--dm-bg-300);
+    --primary-100:var(--lm-primary-100);
+    --primary-200:var(--lm-primary-200);
+    --primary-300:var(--lm-primary-300);
+    --accent-100:var(--lm-accent-100);
+    --accent-200:var(--lm-accent-200);
+    --text-100:var(--lm-text-100);
+    --text-200:var(--lm-text-200);
+    --bg-100:var(--lm-bg-100);
+    --bg-200:var(--lm-bg-200);
+    --bg-300:var(--lm-bg-300);
 
 
     /* light mode */

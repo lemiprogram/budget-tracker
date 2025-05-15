@@ -10,12 +10,13 @@ ul{
     list-style: none;
 }
 body{
-    background-color: var(--bg-100);
+    background-color: var(--bg-200);
     color: var(--text-100);
+    position: relative;
 }
 .focus-nav{
     border-bottom: 1px solid var(--text-100);
-}
+    }
 .hidden{
     display: none;
 }
@@ -24,7 +25,11 @@ body{
     border-radius: 20px;
     background-color: var(--text-100);
     color: var(--bg-100);
-    text-align: center;    
+    text-align: center;  
+    width: 100px;
+    height: 40px;  
+    display: grid;
+    place-content: center;
 }
 /*
                 ****************************************************************
@@ -35,6 +40,8 @@ body{
 header{
     display: flex;
     justify-content: space-between;
+    background-color: var(--bg-100);
+    width: 100%;
 }
 
 header .heading {
@@ -115,6 +122,11 @@ input:is(:focus,:focus-within){
 select{
     text-align: center;
 }
+.add-transaction{
+    display: grid;
+    place-content: center end;
+    margin: 0 20px;
+}
 
 @media screen and (max-width:700px){
     .inp{
@@ -122,12 +134,21 @@ select{
     }
 }
 
-    /* table-section */
-    .table{
-        display: flex;
-        flex-direction: column;
-    }
+/* table-section */
+.table{
+    display: grid;
+    place-content: end end;
+}
 .section-table table{
     text-align: center;
     
+}
+td,th{
+    padding: 20px 30px;
+}
+@media only screen and (max-width:700px){
+td,th{
+    padding: 10px 18px ;
+    
+}
 }
