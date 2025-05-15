@@ -1,13 +1,37 @@
-// nav links
-const homeNav  = document.querySelector("#home");
-const tableNav  = document.querySelector("#table");
-const spreadSheetNav  = document.querySelector("#spreadSheet");
-const filterNav  = document.querySelector("#filter");
+//variables
+  //header heading
+  const logo = document.querySelector("header .heading")
+  // nav items
+  const navItems = document.querySelectorAll(".nav-item");
+  const [homeNav, tableNav, spreadSheetNav, filterNav]  = navItems
+  // sections
+  const sections = document.querySelectorAll(".section")
+  const [homeSection,tableSection,spreadSheetSection,filterSection] = sections
 
-// sections
+//functions
 
-const homeSection  = document.querySelector("#section-home");
-const tableSection  = document.querySelector("#section-table");
-const spreadSheetSection  = document.querySelector("#section-spreadSheet");
-const filterSection  = document.querySelector("#section-filter");
+// changeFocusNav = adds the focus-nav class to the nav-link selected
+  function changeFocusNav (e) {
+    for(let nav of e.parentNode.querySelectorAll("li")){
+      if(nav  === e){
+        nav.classList.add("focus-nav")
+        continue
+      }
+      nav.classList.remove("focus-nav")
+    }
+    changeSection(e.id)
+  }
+  // changeSection = add the hidden class to the nav-links not selected
+  
+  //renderPage = renders the page to the original set state
+  function renderPage(){
+    changeFocusNav(homeNav);
+    
+  }
+//add event listeners 
+  //when a nav item is clicked it would evoke the changeFocusNav function on the item clicked
+  navItems.forEach(item=>item.addEventListener("click",e=>changeFocusNav(e.target)))
+  // when the logo is clicked it would evoke the changeFocusNav function on the homeNav
+  logo.addEventListener("click",()=>changeFocusNav(homeNav))
 
+  renderPage()
