@@ -22,7 +22,17 @@
     changeSection(e.id)
   }
   // changeSection = add the hidden class to the nav-links not selected
-  
+  function changeSection(id){
+    e = document.querySelector(`#section-${id}`)
+    for(let section of e.parentNode.querySelectorAll(".section")){
+      if(section === e){
+        section.classList.remove("hidden")
+        continue;
+      }
+      section.classList.add("hidden")
+    }
+    
+  }
   //renderPage = renders the page to the original set state
   function renderPage(){
     changeFocusNav(homeNav);
