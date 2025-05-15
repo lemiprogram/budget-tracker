@@ -11,6 +11,8 @@
   //btns
   const addTransactionBtn = document.querySelector("#add-transaction")
   //table
+  const tableInps = document.querySelector(".table-inps")
+  const table = document.querySelector(".table")
   const transactionTable = document.querySelector(".section-table table tBody")
   const tableBalance = document.querySelector(".section-table table tFoot .balance-val")
   const tableTotalIncome = document.querySelector(".section-table table tFoot .total-income-val")
@@ -19,13 +21,14 @@
   let transactions = [];
 
   //values
-  let balance = localStorage.getItem("balance")?Number(localStorage.getItem("balance")):0;
 
 //functions
 
 //renderPage = renders the page to the original set state
 function renderPage(){
-  
+  let balance = calcBalance(transactions)
+  let totalExpense = calcExpense(transactions)
+  let totalIncome = calcIncome(transactions)
   transactionTable.innerHTML = transactions.map(transaction => `
         <tr>
             <td>${transaction.date.toDateString().slice(4)}</td>
@@ -35,8 +38,16 @@ function renderPage(){
         </tr>
     `
   ).join("")
-  calcBalance(transactions);
-  console.log(balance)
+  tableBalance.innerHTML = balance?balance:"-"
+  tableTotalExpense.innerHTML = totalExpense?totalExpense:"-"
+  tableTotalIncome.innerHTML = totalIncome?totalIncome:"-"
+
+  if(tableInps.style.display === "none"){
+      table.style.placeContent = "center"
+  }
+  else{
+    table.style.placeContent = "end"
+  }
   
 }
 // changeFocusNav = adds the focus-nav class to the nav-link selected
@@ -76,7 +87,7 @@ function renderPage(){
   } 
   //calcBalance = calculates the balance after the page is rendered
   function calcBalance(arr){
-    balance = 0
+    let balance = 0
     for(let obj of arr){
       if(obj.type === "income"){
         balance += Number(obj.amount)
@@ -84,11 +95,37 @@ function renderPage(){
       }
       balance -= Number(obj.amount)
     }
+    return balance
   }
+  //calcIncome = calculates the Income after the page is rendered
+  function calcIncome(arr){
+    let income = 0
+    for(let obj of arr){
+      if(obj.type === "income"){
+        income += Number(obj.amount)
+        continue
+      }
+    }
+    return income
+  }
+  //calcExpense = calculates the Expense after the page is rendered
+  function calcExpense(arr){
+    let expense = 0
+    for(let obj of arr){
+      if(obj.type === "expense"){
+        expense += Number(obj.amount)
+        continue
+      }
+    }
+    return expense
+  }
+  
+  //showWindow = used to close a menu by clicking on any part of the window that is not that element
   function showWindow(element){
     window.onclick = event=>{
       if(event.target === element){
           closeElement(element)
+          renderPage()
       }
     }
   }
