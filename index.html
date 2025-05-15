@@ -13,6 +13,7 @@
         <nav class="header-nav">
             <ul>
                 <li class="nav-item" id="home">Home</li>
+                <li class="nav-item" id="table">Table</li>
                 <li class="nav-item" id="spreadSheet">Spread Sheet</li>
                 <li class="nav-item" id="filter"> Advanced Filter</li>
             </ul>
@@ -23,7 +24,35 @@
     </header>
     <main>
         <div class="section section-home" id="section-home">
-            <div class="home-inps">
+            <div class="cards">
+                <div class="balance-card card">
+                    <div class="heading">Total Balance</div>
+                    <div class="balance">$0.00</div>
+                </div>
+                <div class="transaction-card card">
+                    <div class="heading">Weekly</div>
+                    <div class="transactions-nav">
+                        <div class="nav-income">Income</div>
+                        <div class="nav-expenses">Expenses</div>
+                    </div>
+                    <div class="transactions"></div>
+                </div>
+                <div class="incomeExpense-card card">
+                    <div class="income">
+                        <div class="heading">Income</div>
+                        <div class="amount"></div>
+                        <div class="image"></div>
+                    </div>
+                    <div class="expense">
+                        <div class="heading">Expense</div>
+                        <div class="amount"></div>
+                        <div class="image"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section section-table" id="section-table">
+            <div class="table-inps">
                 <div class="inps">
                     <div class="transaction-inp inp">
                         <label for="transaction">Transaction:</label>
@@ -40,20 +69,22 @@
                             <option value="income">Income</option>
                         </select>
                     </div>
+                    <div class="add-transaction inp btn">Add</div>
+                    
                 </div>
             </div>
             <div class="close-btn"></div>
-            <div class="home-table">
+            <div class="table">
                 <table>
                     <tHead>
                         <tr>
+                            <th>Date</th>
                             <th>Transactions</th>
                             <th>Expenses</th>
                             <th>Income</th>
                         </tr>
                     </tHead>
                     <tBody>
-                        
                     </tBody>
                 </table>
             </div>
@@ -61,5 +92,6 @@
         <div class="section section-spreadSheet" id="section-spreadSheet"></div>
         <div class="section section-filter" id="section-filter"></div>
     </main>
+    <script src="script.js"></script>
 </body>
 </html>

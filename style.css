@@ -13,6 +13,19 @@ body{
     background-color: var(--bg-100);
     color: var(--text-100);
 }
+.focus-nav{
+    border-bottom: 1px solid var(--text-100);
+}
+.hidden{
+    display: none;
+}
+.btn{
+    cursor: pointer;
+    border-radius: 20px;
+    background-color: var(--text-100);
+    color: var(--bg-100);
+    text-align: center;    
+}
 /*
                 ****************************************************************
                                         Header
@@ -27,12 +40,12 @@ header{
 header .heading {
     font-size: 2.5em;
     padding-left: 20px;
+    cursor: pointer;
 }
-
-ul{
-}
-li{
+.header-nav li{
     padding: 15px 20px;
+    cursor: pointer;
+    font-weight: 600;
 }
 .menu{
     display: none;
@@ -59,16 +72,16 @@ li{
                 **************************************************************** 
 */
 /* section-home */
-.section-home{
+.section-table{
     position: relative;
 }
     /* home-inps */
-.home-inps{
+.table-inps{
     position: fixed;
     width: 100vw;
     height: 100vh;
-    background-color: var(--faded-black);
-    display: none;
+    background-color: #00000041;
+    display: flex;
     place-content: center start;
 }
 .inps{
@@ -84,6 +97,9 @@ li{
     padding: 20px;
     gap: 10px;
 }
+input{
+    padding: 0 10px;
+}
 label +:is(input,select){
     min-width: 100px;
     height: 30px;
@@ -91,14 +107,27 @@ label +:is(input,select){
     width: 200px;
     border: none;
     background-color: aliceblue;
+
+}
+input:is(:focus,:focus-within){
+    outline: black dotted 2px;
 }
 select{
     text-align: center;
 }
+
 @media screen and (max-width:700px){
     .inp{
         flex-flow: column;
     }
 }
 
-    /* home-table */
+    /* table-section */
+    .table{
+        display: flex;
+        flex-direction: column;
+    }
+.section-table table{
+    text-align: center;
+    
+}
