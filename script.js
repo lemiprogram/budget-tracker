@@ -12,6 +12,9 @@
   const addTransactionBtn = document.querySelector("#add-transaction")
   //table
   const transactionTable = document.querySelector(".section-table table tBody")
+  const tableBalance = document.querySelector(".section-table table tFoot .balance-val")
+  const tableTotalIncome = document.querySelector(".section-table table tFoot .total-income-val")
+  const tableTotalExpense = document.querySelector(".section-table table tFoot .total-expense-val")
   //arrays
   let transactions = [];
 
@@ -82,9 +85,18 @@ function renderPage(){
       balance -= Number(obj.amount)
     }
   }
-  
-//add event listeners 
-  //when a nav item is clicked it would evoke the changeFocusNav function on the item clicked
+  function showWindow(element){
+    window.onclick = event=>{
+      if(event.target === element){
+          closeElement(element)
+      }
+    }
+  }
+  function closeElement(element){
+    element.style.display = "none"
+  }
+//add event listeners
+  //when a nav item is clicked it would evoke thechangeFocusNav function on the item clicked
   navItems.forEach(item=>item.addEventListener("click",e=>changeFocusNav(e.target)))
   // when the logo is clicked it would evoke the changeFocusNav function on the homeNav
   logo.addEventListener("click",()=>changeFocusNav(homeNav))
@@ -93,3 +105,4 @@ function renderPage(){
   //
 renderPage()
 changeFocusNav(homeNav)
+showWindow(document.querySelector(".table-inps"))
