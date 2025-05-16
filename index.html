@@ -12,7 +12,6 @@
         <div class="heading">WalletWise</div>
         <nav class="header-nav">
             <ul>
-                <li class="nav-item" id="home">Home</li>
                 <li class="nav-item" id="table">Table</li>
                 <li class="nav-item" id="filter"> Advanced Filter</li>
             </ul>
@@ -22,34 +21,7 @@
         </div>
     </header>
     <main>
-        <div class="section section-home" id="section-home">
-            <div class="cards">
-                <div class="balance-card card">
-                    <div class="heading">Total Balance</div>
-                    <div class="balance">$<span class="balance-val">0.00</span></div>
-                </div>
-                <div class="transaction-card card">
-                    <div class="heading">Weekly</div>
-                    <div class="transactions-nav">
-                        <div class="nav-income">Income</div>
-                        <div class="nav-expenses">Expenses</div>
-                    </div>
-                    <div class="transactions"></div>
-                </div>
-                <div class="incomeExpense-card card">
-                    <div class="income">
-                        <div class="heading">Income</div>
-                        <div class="amount total-income-val"></div>
-                        <div class="image"></div>
-                    </div>
-                    <div class="expense">
-                        <div class="heading">Expense</div>
-                        <div class="amount total-expense-val"></div>
-                        <div class="image"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
+
         <div class="section section-table" id="section-table">
             <div class="table-inps">
                 <div class="inps">
@@ -98,7 +70,47 @@
                 </table>
             </div>
         </div>
-        <div class="section section-filter" id="section-filter"></div>
+        <div class="section section-filter" id="section-filter">
+            <div class="table-inps">
+                <div class="inps">
+                    <div class="filter-type inp">
+                        <label for="transactionType">
+                            <input type="checkbox" >
+                            Show income
+                        </label>
+                        <label for="transactionType">
+                            <input type="checkbox" >
+                            Show Expenses
+                        </label>
+                        
+                        </select>
+                    </div>
+                    <div class="filter-transaction"><button class="btn" id="filter-transaction">filter</button></div>
+                    
+                </div>
+            </div>
+            <div class="table">
+                <table>
+                    <tHead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Transactions</th>
+                            
+                        </tr>
+                    </tHead>
+                    <tBody>
+                    </tBody>
+                    <tFoot>
+                        <tr class="total-row">
+                            <th colspan="2">Total:</th>
+                        </tr>
+                        <tr class="balance-row">
+                            
+                        </tr>
+                    </tFoot>
+                </table>
+            </div>
+        </div>
     </main>
     <script src="script.js"></script>
 </body>
