@@ -14,7 +14,6 @@
             <ul>
                 <li class="nav-item" id="home">Home</li>
                 <li class="nav-item" id="table">Table</li>
-                <li class="nav-item" id="spreadSheet">Spread Sheet</li>
                 <li class="nav-item" id="filter"> Advanced Filter</li>
             </ul>
         </nav>
@@ -27,7 +26,7 @@
             <div class="cards">
                 <div class="balance-card card">
                     <div class="heading">Total Balance</div>
-                    <div class="balance">$0.00</div>
+                    <div class="balance">$<span class="balance-val">0.00</span></div>
                 </div>
                 <div class="transaction-card card">
                     <div class="heading">Weekly</div>
@@ -40,12 +39,12 @@
                 <div class="incomeExpense-card card">
                     <div class="income">
                         <div class="heading">Income</div>
-                        <div class="amount"></div>
+                        <div class="amount total-income-val"></div>
                         <div class="image"></div>
                     </div>
                     <div class="expense">
                         <div class="heading">Expense</div>
-                        <div class="amount"></div>
+                        <div class="amount total-expense-val"></div>
                         <div class="image"></div>
                     </div>
                 </div>
@@ -73,7 +72,6 @@
                     
                 </div>
             </div>
-            <div class="show-transactionInps-btn"><button class="btn">Show</button></div>
             <div class="table">
                 <table>
                     <tHead>
@@ -100,7 +98,6 @@
                 </table>
             </div>
         </div>
-        <div class="section section-spreadSheet" id="section-spreadSheet"></div>
         <div class="section section-filter" id="section-filter"></div>
     </main>
     <script src="script.js"></script>

@@ -37,6 +37,9 @@ header{
     justify-content: space-between;
     background-color: var(--bg-100);
     width: 100%;
+    position: fixed;
+    z-index: 30;
+    top: 0;
 }
 
 header .heading {
@@ -73,20 +76,25 @@ header .heading {
                                         Main
                 **************************************************************** 
 */
-/* section-home */
-.
+main{
+    margin-top: 60px;
+}
+/* section-table */
+.section-table{
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+}
     /* table-inps */
 .table-inps{
-    position: fixed;
-    z-index: 1;
-    width: 100%;
+    position: relative;
     height: 100%;
-    top: -10px;
     background-color: var(--faded-black);
     display: flex;
     place-content: center start;
 }
 .inps{
+    position: fixed;
     background-color: var(--bg-200);
     height: 100%;
     display: grid;
@@ -127,11 +135,15 @@ select{
     position: fixed;
     z-index: 0;
     top: 50%;
+    opacity: 80%;
 }
 
 @media screen and (max-width:700px){
     .inp{
         flex-flow: column;
+    }
+    .show-transactionInps-btn .btn{
+        transform: rotata(180deg);
     }
 }
 
@@ -179,7 +191,7 @@ td,th{
 }
 }
 
-
+/* added class lists */
 .focus-nav{
     border-bottom: 2px solid var(--text-100);
     }

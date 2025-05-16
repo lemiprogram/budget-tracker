@@ -4,56 +4,56 @@
   const logo = document.querySelector("header .heading")
   // nav items
   const navItems = document.querySelectorAll(".nav-item");
-  const [homeNav, tableNav, spreadSheetNav, filterNav]  = navItems
+  const [homeNav, tableNav,filterNav]  = navItems
   // sections
   const sections = document.querySelectorAll(".section")
-  const [homeSection,tableSection,spreadSheetSection,filterSection] = sections
+  const [homeSection,tableSection, filterSection] = sections
   //btns
   const addTransactionBtn = document.querySelector("#add-transaction")
-  const showTransactionInpsBtn = document.querySelector(".show-transactionInps-btn")
   //table
   const tableInps = document.querySelector(".table-inps")
   const table = document.querySelector(".table")
   const transactionTable = document.querySelector(".section-table table tBody")
-  const tableBalance = document.querySelector(".section-table table tFoot .balance-val")
-  const tableTotalIncome = document.querySelector(".section-table table tFoot .total-income-val")
-  const tableTotalExpense = document.querySelector(".section-table table tFoot .total-expense-val")
+  const balanceVal = document.querySelector(".balance-val")
+  const totalIncome = document.querySelector(".total-income-val")
+  const totalExpense = document.querySelector(".total-expense-val")
   //arrays
-  let transactions = [];
+  !localStorage.getItem("transactions")?localStorage.setItem("transactions",JSON.stringify([])):console.log(JSON.parse(localStorage.getItem("transactions")))
+  let transactions = JSON.parse(localStorage.getItem("transactions"))
 
   //values
 
-//functions
-
-//renderPage = renders the page to the original set state
-function renderPage(){
+  //functions
+  
+  //renderPage = renders the page to the original set state
+  function renderPage(){
   let balance = calcBalance(transactions)
   let totalExpense = calcExpense(transactions)
   let totalIncome = calcIncome(transactions)
+   console.log(new Date(transactions[0].date).toDateString())
   //home section
-  
+
   // table section
   transactionTable.innerHTML = transactions.map(transaction => `
         <tr>
-            <td>${transaction.date.toDateString().slice(4)}</td>
+            <td>${getTimeDif(new Date(transaction.date))}</td>
             <td>${transaction.title}</td>
             <td class="expense-value">${transaction.type === "expense"? transaction.amount:"-"}</td>
             <td class="income-value">${transaction.type === "income"? transaction.amount:"-"}</td>
         </tr>
     `
   ).join("")
-  tableBalance.innerHTML = balance?balance:"-"
-  tableTotalExpense.innerHTML = totalExpense?totalExpense:"-"
-  tableTotalIncome.innerHTML = totalIncome?totalIncome:"-"
+  balanceVal.innerText = balance?balance:"-"
+  totalExpense.innerText = totalExpense?totalExpense:"-"
+  totalIncome.innerText = totalIncome?totalIncome:"-"
 
 
-  
 }
 // changeFocusNav = adds the focus-nav class to the nav-link selected
-  function changeFocusNav (e) {
-    for(let nav of e.parentNode.querySelectorAll("li")){
-      if(nav  === e){
-        nav.classList.add("focus-nav")
+function changeFocusNav (e) {
+  for(let nav of e.parentNode.querySelectorAll("li")){
+    if(nav  === e){
+      nav.classList.add("focus-nav")
         continue
       }
       nav.classList.remove("focus-nav")
@@ -74,6 +74,7 @@ function renderPage(){
   }
   //addTransaction = adds a transaction to the trasactions array
   function addTransaction(){
+
     const[title,amount] = document.querySelectorAll(".inp input")
     const type = document.querySelector(".inp select")
     transactions.push({
@@ -82,6 +83,7 @@ function renderPage(){
       amount:Number(amount.value),
       type:type.value,
     });
+    localStorage.setItem("transactions",JSON.stringify(transactions))
     renderPage();
   } 
   //calcBalance = calculates the balance after the page is rendered
@@ -118,7 +120,26 @@ function renderPage(){
     }
     return expense
   }
-  
+  function getTimeDif(obj){
+    let now = new Date()
+    timeAgo = Math.ceil((now.getTime() - obj.getTime()) / 1000)
+    if(timeAgo<60){
+      return `${timeAgo} Secs Ago`
+    }
+    timeAgo = Math.ceil(timeAgo/60)
+    
+    if(timeAgo<60){
+      return `${timeAgo} Mins Ago`
+    }
+    timeAgo = Math.ceil(timeAgo/60)
+    
+    if(timeAgo<24){
+      return `${timeAgo} Hrs Ago`
+    }
+    timeAgo = Math.ceil(timeAgo/24)
+    return `${timeAgo} Days Ago`
+    
+  }
   //showWindow = used to close a menu by clicking on any part of the window that is not that element
   function showWindow(element){
     window.onclick = event=>{
@@ -138,11 +159,7 @@ function renderPage(){
   logo.addEventListener("click",()=>changeFocusNav(homeNav))
   //when the add button is clicked it would add a transaction to the treansactions array 
   addTransactionBtn.addEventListener("click", addTransaction)
-  //brings up the table-inps
-  showTransactionInpsBtn.addEventListener("click", ()=>{
-    renderPage()
-    tableInps.classList.remove("hidden")
-  })
+  
 renderPage()
 changeFocusNav(homeNav)
 showWindow(document.querySelector(".table-inps"))
