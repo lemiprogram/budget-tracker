@@ -4,10 +4,10 @@
   const logo = document.querySelector("header .heading")
   // nav items
   const navItems = document.querySelectorAll(".nav-item");
-  const [homeNav, tableNav,filterNav]  = navItems
+  const [tableNav,filterNav]  = navItems
   // sections
   const sections = document.querySelectorAll(".section")
-  const [homeSection,tableSection, filterSection] = sections
+  const [tableSection, filterSection] = sections
   //btns
   const addTransactionBtn = document.querySelector("#add-transaction")
   //table
@@ -152,14 +152,25 @@ function changeFocusNav (e) {
   function closeElement(element){
     element.classList.add("hidden")
   }
+
+  function filterByIncome(arr){
+    let filteredArr = arr.filter(item=>item.type === "income")
+    console.log(filteredArr)
+  }
+  function filterByExpense(arr){
+    let filteredArr = arr.filter(item=>item.type === "expense")
+    console.log(filteredArr)
+  }
+
+  console.log(filterByExpense(transactions))
 //add event listeners
   //when a nav item is clicked it would evoke thechangeFocusNav function on the item clicked
   navItems.forEach(item=>item.addEventListener("click",e=>changeFocusNav(e.target)))
-  // when the logo is clicked it would evoke the changeFocusNav function on the homeNav
-  logo.addEventListener("click",()=>changeFocusNav(homeNav))
+  // when the logo is clicked it would evoke the changeFocusNav function on the tableNav
+  logo.addEventListener("click",()=>changeFocusNav(tableNav))
   //when the add button is clicked it would add a transaction to the treansactions array 
   addTransactionBtn.addEventListener("click", addTransaction)
   
 renderPage()
-changeFocusNav(homeNav)
+changeFocusNav(tableNav)
 showWindow(document.querySelector(".table-inps"))
