@@ -44,6 +44,7 @@
                     
                 </div>
             </div>
+            
             <div class="table">
                 <table>
                     <tHead>
@@ -74,14 +75,45 @@
             <div class="table-inps">
                 <div class="inps">
                     <div class="filter-type inp">
-                        <label for="transactionType">
-                            <input type="checkbox" >
-                            Show income
-                        </label>
-                        <label for="transactionType">
-                            <input type="checkbox" >
-                            Show Expenses
-                        </label>
+
+                        
+                        <div class="income-filters type-filters">
+                            <label>
+                                <input type="checkbox" >
+                                Show Income
+                            </label>
+                            <hr>
+                            <div class="filter-by-amount">
+                                <label>Amount</label>
+                                <input type="text">
+                                <select name="" id="">
+                                    <option value="le">&le;</option>
+                                    <option value="lt">&lt;</option>
+                                    <option value="equals">&equals;</option>
+                                    <option value="gt">&ge;</option>
+                                    <option value="ge">&gt;</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="expense-filters type-filters">
+                            <label>
+                                <input type="checkbox" >
+                                Show Expense
+                            </label>
+                            <hr>
+                            <div class="filter-by-amount">
+                                <label>Amount</label>
+                                <input type="text">
+                                <select name="" id="">
+                                    <option value="le">&le;</option>
+                                    <option value="lt">&lt;</option>
+                                    <option value="equals">&equals;</option>
+                                    <option value="gt">&ge;</option>
+                                    <option value="ge">&gt;</option>
+                                </select>
+                            </div>
+                        </div>
+                        
                         
                         </select>
                     </div>
@@ -89,24 +121,18 @@
                     
                 </div>
             </div>
+
             <div class="table">
                 <table>
                     <tHead>
                         <tr>
-                            <th>Date</th>
-                            <th>Transactions</th>
                             
                         </tr>
                     </tHead>
                     <tBody>
                     </tBody>
                     <tFoot>
-                        <tr class="total-row">
-                            <th colspan="2">Total:</th>
-                        </tr>
-                        <tr class="balance-row">
-                            
-                        </tr>
+                        
                     </tFoot>
                 </table>
             </div>

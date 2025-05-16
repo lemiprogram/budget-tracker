@@ -8,15 +8,19 @@
   // sections
   const sections = document.querySelectorAll(".section")
   const [tableSection, filterSection] = sections
+  // inputs
+  const filterCheckBoxes = document.querySelectorAll(".filter-type label input")
+  const [showIncome,showExpense] = filterCheckBoxes
   //btns
   const addTransactionBtn = document.querySelector("#add-transaction")
+  const filterTransactionBtn = document.querySelector("#filter-transaction")
   //table
   const tableInps = document.querySelector(".table-inps")
   const table = document.querySelector(".table")
   const transactionTable = document.querySelector(".section-table table tBody")
-  const balanceVal = document.querySelector(".balance-val")
-  const totalIncome = document.querySelector(".total-income-val")
-  const totalExpense = document.querySelector(".total-expense-val")
+  const tableBalance = document.querySelector(".section-table table tFoot .balance-val")
+  const tableTotalIncome = document.querySelector(".section-table table tFoot .total-income-val")
+  const tableTotalExpense = document.querySelector(".section-table table tFoot .total-expense-val")
   //arrays
   !localStorage.getItem("transactions")?localStorage.setItem("transactions",JSON.stringify([])):console.log(JSON.parse(localStorage.getItem("transactions")))
   let transactions = JSON.parse(localStorage.getItem("transactions"))
@@ -30,8 +34,7 @@
   let balance = calcBalance(transactions)
   let totalExpense = calcExpense(transactions)
   let totalIncome = calcIncome(transactions)
-   console.log(new Date(transactions[0].date).toDateString())
-  //home section
+  renderFilters()
 
   // table section
   transactionTable.innerHTML = transactions.map(transaction => `
@@ -43,9 +46,9 @@
         </tr>
     `
   ).join("")
-  balanceVal.innerText = balance?balance:"-"
-  totalExpense.innerText = totalExpense?totalExpense:"-"
-  totalIncome.innerText = totalIncome?totalIncome:"-"
+  tableBalance.innerHTML = balance
+  tableTotalExpense.innerHTML = totalExpense
+  tableTotalIncome.innerHTML = totalIncome
 
 
 }
@@ -76,6 +79,12 @@ function changeFocusNav (e) {
   function addTransaction(){
 
     const[title,amount] = document.querySelectorAll(".inp input")
+    if(title.value.trim() === ""){
+      return alert("please input a Transaction name")
+    }
+    if(Number.isNaN(Number(amount.value))||!amount.value.trim(  )){
+      return alert("please input a number")
+    }
     const type = document.querySelector(".inp select")
     transactions.push({
       date:new Date(),
@@ -83,6 +92,7 @@ function changeFocusNav (e) {
       amount:Number(amount.value),
       type:type.value,
     });
+    title.value=""; amount.value = "";
     localStorage.setItem("transactions",JSON.stringify(transactions))
     renderPage();
   } 
@@ -153,24 +163,88 @@ function changeFocusNav (e) {
     element.classList.add("hidden")
   }
 
-  function filterByIncome(arr){
-    let filteredArr = arr.filter(item=>item.type === "income")
-    console.log(filteredArr)
+  function filterOutIncome(arr){
+    return arr.filter(item=>item.type !== "income")
   }
-  function filterByExpense(arr){
-    let filteredArr = arr.filter(item=>item.type === "expense")
-    console.log(filteredArr)
+  function filterOutExpense(arr){
+    return arr.filter(item=>item.type !== "expense")
   }
+  function filterByAmount(arr,amount,sign,type){
+    switch (sign){
+      case "le":
+        return arr.filter(item=>item.amount<=amount&&item.type==type)
+        
+      case "lt":
+        return arr.filter(item=>item.amount<amount&&item.type==type)
+        
+      case "ge":
+        return arr.filter(item=>item.amount>=amount&&item.type==type)
+        
+      case "gt":
+        return arr.filter(item=>item.amount>amount&&item.type==type)
+        
+      default :
+        return arr.filter(item=>item.amount==amount&&item.type==type)
+        
+    }
 
-  console.log(filterByExpense(transactions))
+  }
+  const renderFilters = ()=>{
+      
+    const table = document.querySelector("#section-filter table");
+    const [incomeAmount, expenseAmount] = document.querySelectorAll("#section-filter .filter-by-amount input")
+    const [incomeSign, expenseSign] = document.querySelectorAll("#section-filter .filter-by-amount select")
+    table.classList.remove("hidden")
+    let arr = transactions
+    let checkedIncome = showIncome.checked
+    let checkedExpense = showExpense.checked
+
+    if (!checkedIncome) {
+      arr = filterOutIncome(arr)
+    }
+    if (!checkedExpense) {
+      arr = filterOutExpense(arr)
+    }
+    if(incomeAmount.value){
+      arr = filterByAmount(arr,incomeAmount.value,incomeSign.value,"income")
+    }
+    if(expenseAmount.value){
+      arr = filterByAmount(arr,expenseAmount.value,expenseSign.value,"expense")
+    }
+    if(arr.length){
+      table.classList.remove("hidden")
+      table.querySelector("thead tr").innerHTML = `
+      <th>Date</th>
+      <th>Transactions</th>
+      ${checkedExpense?"<th>Expense</th>":""}
+      ${checkedIncome?"<th>Income</th>":""}
+    `
+    table.querySelector("tBody").innerHTML = arr.map(item=>`
+<tr>
+  <td>${getTimeDif(new Date(item.date))}</td>
+  <td>${item.title}</td>
+  ${!checkedExpense?"":item.type !== "expense"?"<td>-</td>": "<td>"+item.amount+"</td>"}
+  ${!checkedIncome?"":item.type !== "income"?"<td>-</td>": "<td>"+item.amount+"</td>"}
+</tr>
+      `).join("")
+      table.querySelector("tFoot").innerHTML = `
+<th colspan="2">Total</th>
+${checkedExpense?"<td>"+calcExpense(arr)+"</td>": ""}
+${checkedIncome?"<td>"+calcIncome(arr)+"</td>": ""}
+      `
+    }
+    else{
+      table.classList.add("hidden")
+    }
+  }
+  console.log(filterOutExpense(transactions))
 //add event listeners
   //when a nav item is clicked it would evoke thechangeFocusNav function on the item clicked
-  navItems.forEach(item=>item.addEventListener("click",e=>changeFocusNav(e.target)))
-  // when the logo is clicked it would evoke the changeFocusNav function on the tableNav
-  logo.addEventListener("click",()=>changeFocusNav(tableNav))
+  navItems.forEach(item=>item.addEventListener("click",e=>changeFocusNav(e.target)))  
   //when the add button is clicked it would add a transaction to the treansactions array 
   addTransactionBtn.addEventListener("click", addTransaction)
-  
+  //when the filter button is clicked it would display transactions onto the table based on the filters chosen
+  filterTransactionBtn.addEventListener("click", renderFilters)
 renderPage()
 changeFocusNav(tableNav)
 showWindow(document.querySelector(".table-inps"))
